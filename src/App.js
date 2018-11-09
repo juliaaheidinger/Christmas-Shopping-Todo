@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import Todo from './Todo'
 import Input from './Input'
+import Delete from './Delete'
 
 class App extends Component {
   state = {
@@ -41,17 +42,33 @@ class App extends Component {
     })
   }
 
+  deleteListItem = index => {
+    const { gifts } = this.state
+    const newGifts = [...gifts.slice(0, index), ...gifts.slice(index + 1)]
+
+    this.setState({
+      gifts: newGifts
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
         <Input onEnter={event => this.onEnter(event)} />
         <ul>
           {this.state.gifts.map((gift, index) => (
-            <Todo
-              text={gift.text}
-              done={gift.done}
-              onClick={() => this.toggleDone(index)}
-            />
+            <div className="listItem" key={`listItem${index}`}>
+              <Todo
+                key={`todo${index}`}
+                text={gift.text}
+                done={gift.done}
+                onClick={() => this.toggleDone(index)}
+              />
+              <Delete
+                key={`delete${index}`}
+                onClick={() => this.deleteListItem(index)}
+              />
+            </div>
           ))}
         </ul>
       </React.Fragment>

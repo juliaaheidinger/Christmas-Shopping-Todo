@@ -16,6 +16,6 @@ ul {
   text-decoration: line-through;
 }
 
-.notdone {
-  color: green;
+li {
+  margin-right: 10px;
 }
