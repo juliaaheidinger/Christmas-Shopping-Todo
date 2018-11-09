@@ -53,7 +53,7 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="container">
         <Input onEnter={event => this.onEnter(event)} />
         <ul>
           {this.state.gifts.map((gift, index) => (
@@ -71,7 +71,7 @@ class App extends Component {
             </div>
           ))}
         </ul>
-      </React.Fragment>
+      </div>
     )
   }
 }

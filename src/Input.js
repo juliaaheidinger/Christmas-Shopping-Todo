@@ -7,7 +7,7 @@ export default class Input extends Component {
       <input
         name="gift-input"
         type="text"
-        placeholder="Dreams and wishes"
+        placeholder="Add Wishes Here"
         onKeyUp={this.props.onEnter}
       />
     )
