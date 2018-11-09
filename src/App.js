@@ -3,21 +3,19 @@ import './App.css'
 import Todo from './Todo'
 
 class App extends Component {
+  state = {
+    isDone: false
+  }
+
+  gifts = ['Gutschein', 'Kamera-Stativ', 'Tee', 'Kaktus']
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <Todo text="HUHU" />
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ul>
+        {this.gifts.map(gift => (
+          <Todo text={gift} />
+        ))}
+      </ul>
     )
   }
 }
