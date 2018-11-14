@@ -19,7 +19,7 @@ const Text = styled.span`
   font-size: 20px;
 `
 
-export default class Input extends Component {
+export default class Seperator extends Component {
   render() {
     return (
       <Wrapper>

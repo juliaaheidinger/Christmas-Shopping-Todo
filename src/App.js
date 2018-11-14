@@ -7,6 +7,7 @@ import Seperator from './Seperator'
 import ProgressBar from './ProgressBar'
 import ToggleButton from './ToggleButton'
 import styled from 'styled-components'
+import ListItem from './ListItem'
 
 const Wrapper = styled.div`
   display: grid;
@@ -16,28 +17,6 @@ const Wrapper = styled.div`
   border-radius: 5px;
   border: solid 2px #858787;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-
-  .listItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 5px;
-    background: #00f4ec;
-    max-width: 200px;
-    padding: 20px 20px 20px 50px;
-    margin: 20px;
-    box-shadow: 0px 10px 20px 5px #178093;
-    border: 4px solid #006375;
-    border-radius: 10px;
-    color: #006375;
-    font-size: 20px;
-    font-family: sans-serif;
-    font-weight: 500;
-  }
-
-  .listItem:nth-child(2n) {
-    background: #00837e;
-  }
 `
 
 class App extends Component {
@@ -59,19 +38,9 @@ class App extends Component {
     })
   }
 
-  onEnter(event) {
-    if (event.key === 'Enter') {
-      this.addNewGift(event)
-      event.target.value = ''
-    }
-  }
-
-  addNewGift(event) {
+  addNewGift = inputText => {
     const { gifts } = this.state
-    const newGifts = [
-      { text: event.target.value, done: false, id: uid() },
-      ...gifts
-    ]
+    const newGifts = [{ text: inputText, done: false, id: uid() }, ...gifts]
     this.setState({
       gifts: newGifts
     })
@@ -91,14 +60,14 @@ class App extends Component {
     return this.state.gifts
       .filter(gift => !gift.done)
       .map(gift => (
-        <li key={gift.id} className="listItem">
+        <ListItem key={gift.id} className="listItem">
           <Todo
             text={gift.text}
             done={gift.done}
             onClick={() => this.toggleDone(gift.id)}
           />
           <Delete onClick={() => this.deleteListItem(gift.id)} />
-        </li>
+        </ListItem>
       ))
   }
 
@@ -106,14 +75,14 @@ class App extends Component {
     return this.state.gifts
       .filter(gift => gift.done)
       .map(gift => (
-        <li key={gift.id} className="listItem">
+        <ListItem key={gift.id} className="listItem">
           <Todo
             text={gift.text}
             done={gift.done}
             onClick={() => this.toggleDone(gift.id)}
           />
           <Delete onClick={() => this.deleteListItem(gift.id)} />
-        </li>
+        </ListItem>
       ))
   }
 
@@ -134,7 +103,7 @@ class App extends Component {
           isDefault={true}
           onClick={() => console.log('hallo')}
         />
-        <Input onEnter={event => this.onEnter(event)} />
+        <Input onEnter={this.addNewGift} />
         <div>
           <Seperator text="ToDos" />
           <ul>{this.renderOpenTodos()}</ul>
