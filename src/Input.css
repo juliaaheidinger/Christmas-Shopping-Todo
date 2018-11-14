@@ -13,3 +13,7 @@ input {
   color: #ffffff;
   font-size: 16px;
 }
+
+/* input:focus {
+  outline: 2px solid hotpink;
+} */
